@@ -27,6 +27,11 @@ export function ContactForm({
     setStatus("loading");
 
     const supabase = createClient();
+    if (!supabase) {
+      setStatus("error");
+      return;
+    }
+
     const { error } = await supabase.from("contacts").insert({
       name: form.name,
       phone: form.phone,

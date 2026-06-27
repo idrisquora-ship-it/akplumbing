@@ -3,6 +3,8 @@ import type { Testimonial, Project } from "@/types/database";
 
 export async function getTestimonials(limit?: number): Promise<Testimonial[]> {
   const supabase = createServerClient();
+  if (!supabase) return [];
+
   let query = supabase.from("testimonials").select("*").order("created_at", { ascending: false });
   if (limit) query = query.limit(limit);
 
@@ -16,6 +18,8 @@ export async function getTestimonials(limit?: number): Promise<Testimonial[]> {
 
 export async function getProjects(limit?: number): Promise<Project[]> {
   const supabase = createServerClient();
+  if (!supabase) return [];
+
   let query = supabase.from("projects").select("*").order("created_at", { ascending: false });
   if (limit) query = query.limit(limit);
 
